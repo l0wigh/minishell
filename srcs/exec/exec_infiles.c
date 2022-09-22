@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:51:27 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/08 15:51:54 by hugrene          ###   ########.fr       */
+/*   Updated: 2022/09/22 16:03:50 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,21 @@ void	handle_heredocs(t_mem *mem, t_cmdlst *lst)
 	char	*buf;
 
 	fd = open(mem->tmpfile, O_TRUNC | O_CREAT | O_WRONLY, 0777);
-	buf = readline("heredocs>>> ");
+	if (fd == -1)
+		return ;
+	buf = readline("🦁 >>> ");
 	while (1)
 	{
+		if (!buf)
+			break ;
 		if (ft_strcmp(buf, lst->heredocs[0]) == 0)
 			break ;
 		write(fd, buf, ft_strlen(buf));
 		write(fd, "\n", 1);
-		buf = readline("heredocs>>> ");
+		buf = readline("🦁 >>> ");
 	}
-	free(buf);
+	if (buf)
+		free(buf);
 	close(fd);
 	mem->exec_loop->fdin = open(mem->tmpfile, O_RDONLY, 0777);
 	dup2(mem->exec_loop->fdin, STDIN_FILENO);

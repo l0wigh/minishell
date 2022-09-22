@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:31:19 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/08 16:31:19 by hugrene          ###   ########.fr       */
+/*   Updated: 2022/09/22 18:19:11 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,8 @@ void	free_exec_loop(t_exec_loop *exec_loop)
 	free(exec_loop);
 }
 
-int	free_mem(t_mem *mem)
+int	free_mem(t_mem *mem, int exit_status)
 {
-	int	exit_status;
-
-	exit_status = mem->last_cmd_exit_statue;
 	if (mem->my_env)
 		free_tab_2d(mem->my_env);
 	if (mem->path_tab)

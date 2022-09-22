@@ -1,0 +1,3 @@
+heredoc :
+- Crash si ctrl+d
+- Crash si mot de sortie directement

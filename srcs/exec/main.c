@@ -6,11 +6,16 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:50:41 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/21 18:04:24 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:21:27 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
+#include "../../readline/include/readline/readline.h"
+
+void rl_replace_line(const char *, int);
 
 int	g_pid = 0;
 
@@ -69,7 +74,7 @@ char	*take_input(t_mem *mem)
 	if (!buf)
 	{
 		ft_printf("\n");
-		exit(free_mem(mem));
+		exit(free_mem(mem, 0));
 	}
 	if (ft_strlen(buf) == 0)
 	{
@@ -106,5 +111,5 @@ int	main(int ac, char **av, char **env)
 		execute(command_list, mem);
 		cmdlst_clear(&command_list);
 	}
-	return (free_mem(mem));
+	return (free_mem(mem, 0));
 }

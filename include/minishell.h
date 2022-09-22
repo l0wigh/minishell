@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:28:58 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/21 18:09:24 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:20:09 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_mem		*initialize_mem(void);
 // free
 
 char		**change_pwd_relativ(char *path, char **my_env);
-int			free_mem(t_mem *mem);
+int			free_mem(t_mem *mem, int exit_status);
 void		free_path(t_mem *mem);
 
 //	path

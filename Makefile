@@ -6,20 +6,20 @@
 #    By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 15:59:57 by hugrene           #+#    #+#              #
-#    Updated: 2022/09/21 17:56:34 by thomathi         ###   ########.fr        #
+#    Updated: 2022/09/22 15:43:24 by thomathi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	minishell
 
 CC			:=	clang
-ifdef LDFLAGS
-	FLAGS		:=	$(LDFLAGS) -lreadline -Llibft -lft
-	LDFLAGS = -L/Users/hugrene/homebrew/opt/lib -lreadline
-	CPPFLAGS = -I/Users/hugrene/homebrew/opt/readline/include
-else
-	FLAGS		:=	-lreadline -Llibft -lft
-endif
+# ifdef LDFLAGS
+# 	FLAGS		:=	$(LDFLAGS) -lreadline -Llibft -lft
+# 	LDFLAGS = -L/Users/$(USER)/goinfre/.brew/opt/readline/lib -lreadline
+# 	CPPFLAGS = -I/Users/$(USER)/goinfre/.brew/opt/readline/include
+# else
+FLAGS		:=	-Llibft -lft -L ./readline/lib/ -I ./readline/include/readline/ -lreadline
+# endif
 CFLAGS		:=	-Wall -Wextra -Werror -g3
 #FLAGS		+=	-g -fsanitize=address
 
@@ -70,17 +70,13 @@ END			:=	\033[0m
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INCS) Makefile libft/libft.a
 	mkdir -p $(DIR_OBJS) $(DIR_OBJS)/parsing $(DIR_OBJS)/exec
-ifdef CPPFLAGS
-	$(CC) -I $(DIR_INCS) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
-else
-	$(CC) -I $(DIR_INCS) $(CFLAGS) -c $< -o $@
-endif
+	$(CC) -I $(DIR_INCS) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 	printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
 all:		libft $(NAME)
 
 $(NAME):	$(OBJS)
-	$(CC) $(OBJS) $(FLAGS)  $(FLAGREADLINE) $(CFLAGS) -o $@
+	$(CC) $(OBJS) $(FLAGS) $(CFLAGS) $(LDFLAGS) -o $@
 	printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
 libft:
