@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:51:27 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/22 16:03:50 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:29:08 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_heredocs(t_mem *mem, t_cmdlst *lst)
 	fd = open(mem->tmpfile, O_TRUNC | O_CREAT | O_WRONLY, 0777);
 	if (fd == -1)
 		return ;
-	buf = readline("🦁 >>> ");
+	buf = readline("📄 >> ");
 	while (1)
 	{
 		if (!buf)
@@ -35,7 +35,7 @@ void	handle_heredocs(t_mem *mem, t_cmdlst *lst)
 			break ;
 		write(fd, buf, ft_strlen(buf));
 		write(fd, "\n", 1);
-		buf = readline("🦁 >>> ");
+		buf = readline("📄 >> ");
 	}
 	if (buf)
 		free(buf);

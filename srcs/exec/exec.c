@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:30:45 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/08 16:30:46 by hugrene          ###   ########.fr       */
+/*   Updated: 2022/09/28 18:25:16 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ static int	print_error(int error_code, char *content)
 
 void	exec_cmd(t_mem *mem, t_cmdlst *lst)
 {
+	if (ft_strcmp(lst->command, "<<") == 0)
+	{
+		if (lst->command == NULL)
+			return ;
+		else
+			lst->command = lst->args[0];
+	}
 	init_exec_cmd(mem, lst);
 	if (is_builtin(lst->command))
 	{
@@ -111,7 +118,8 @@ void	execute(t_cmdlst *lst, t_mem *mem)
 		setup_infiles(lst, mem);
 		if (is_exiting(lst))
 			ft_exit(mem, lst);
-		replace_quotes(&(lst->args), mem->my_env, mem->last_cmd_exit_statue);
+		if (lst->args)
+			replace_quotes(&(lst->args), mem->my_env, mem->last_cmd_exit_statue);
 		if (outlst_len(lst->outfiles) > 0)
 			i = 0;
 		else

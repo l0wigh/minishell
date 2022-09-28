@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:33:10 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/12 14:14:27 by hugrene          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:35:51 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,24 +134,45 @@ char	*replace_in_arg(char *arg, char **env, int lex)
 	to the new array.
 	Return 0 on malloc error
 */
-int	replace_quotes(char ***args, char **env, int last_exit)
-{
-	char	**new_args;
-	int		cur;
 
-	new_args = malloc(sizeof(char *) * (strarr_len(*args) + 1));
-	if (!new_args)
+int	replace_quotes(char ***args, char **env, int lex)
+{
+	char	**n_args;
+	int		i;
+
+	n_args = ft_calloc(strarr_len(*args) + 1, sizeof(char *));
+	if (!n_args)
 		return (0);
-	cur = 0;
-	while ((*args)[cur])
+	i = -1;
+	while ((*args)[++i])
 	{
-		new_args[cur] = replace_in_arg((*args)[cur], env, last_exit);
-		if (!new_args[cur])
-			return (free_array_n(new_args, cur));
-		cur++;
+		n_args[i] = replace_in_arg((*args)[i], env, lex);
+		if (!n_args[i])
+			return (0);
 	}
-	new_args[cur] = 0;
 	strarr_free(*args);
-	*args = new_args;
+	*args = n_args;
 	return (1);
 }
+
+/* int	replace_quotes(char ***args, char **env, int last_exit) */
+/* { */
+/* 	char	**new_args; */
+/* 	int		cur; */
+/*  */
+/* 	new_args = malloc(sizeof(char *) * (strarr_len(*args) + 1)); */
+/* 	if (!new_args) */
+/* 		return (0); */
+/* 	cur = 0; */
+/* 	while (*args[cur]) */
+/* 	{ */
+/* 		new_args[cur] = replace_in_arg((*args)[cur], env, last_exit); */
+/* 		if (!new_args[cur]) */
+/* 			return (free_array_n(new_args, cur)); */
+/* 		cur++; */
+/* 	} */
+/* 	new_args[cur] = 0; */
+/* 	strarr_free(*args); */
+/* 	*args = new_args; */
+/* 	return (1); */
+/* } */

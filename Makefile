@@ -6,7 +6,7 @@
 #    By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 15:59:57 by hugrene           #+#    #+#              #
-#    Updated: 2022/09/22 15:43:24 by thomathi         ###   ########.fr        #
+#    Updated: 2022/09/28 14:56:02 by thomathi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CC			:=	clang
 # 	LDFLAGS = -L/Users/$(USER)/goinfre/.brew/opt/readline/lib -lreadline
 # 	CPPFLAGS = -I/Users/$(USER)/goinfre/.brew/opt/readline/include
 # else
-FLAGS		:=	-Llibft -lft -L ./readline/lib/ -I ./readline/include/readline/ -lreadline
+# FLAGS		:=	-Llibft -lft -L ./readline/lib/ -I ./readline/include/readline/ -lreadline
+FLAGS		:=	-Llibft -lft -lreadline
 # endif
 CFLAGS		:=	-Wall -Wextra -Werror -g3
 #FLAGS		+=	-g -fsanitize=address
