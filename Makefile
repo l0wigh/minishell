@@ -34,6 +34,7 @@ LST_SRCS	:=	exec/cd_utils.c \
 				exec/echo.c \
 				exec/env.c \
 				exec/exec.c \
+				exec/exec_verif.c \
 				exec/exec_utils.c \
 				exec/exec_utils2.c \
 				exec/exec_infiles.c \

@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:50:28 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/21 18:10:00 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:57:54 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_cd_home(t_mem *mem)
 {
-	char *path;
+	char	*path;
+
 	path = ft_strdup(getenv("HOME"));
 	mem->my_env = change_pwd_home(mem->my_env);
 	if (chdir(path) == -1)

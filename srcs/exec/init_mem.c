@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:31:19 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/22 18:19:11 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:55:17 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_mem	*initialize_mem(void)
 	mem->path_tab = NULL;
 	mem->tmpfile = "buzz";
 	mem->exit_statue = 0;
-	mem->last_cmd_exit_statue = 0;
+	mem->lces = 0;
 	return (mem);
 }
 

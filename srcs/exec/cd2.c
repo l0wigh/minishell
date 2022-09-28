@@ -55,5 +55,3 @@ char	**change_pwd_home(char **my_env)
 	free(home);
 	return (my_env);
 }
-
-

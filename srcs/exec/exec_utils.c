@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:30:57 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/08 16:30:58 by hugrene          ###   ########.fr       */
+/*   Updated: 2022/09/28 18:55:05 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_outlst_loop(t_mem *mem, t_cmdlst *lst, int i)
 
 int	save_last_exit_statue(t_mem *mem, t_cmdlst *lst)
 {
-	mem->last_cmd_exit_statue = mem->exit_statue;
+	mem->lces = mem->exit_statue;
 	if (mem->exit_statue == 0 && lst->todo_next == 3)
 		return (1);
 	if (mem->exit_statue != 0 && lst->todo_next == 2)

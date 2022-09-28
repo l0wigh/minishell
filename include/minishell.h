@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:28:58 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/22 18:20:09 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:54:17 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_mem
 	char		*exec_path;
 	char		*path_env;
 	int			exit_statue;
-	int			last_cmd_exit_statue;
+	int			lces;
 	int			fd_heredocs[2];
 	char		*tmpfile;
 	t_exec_loop	*exec_loop;
@@ -242,5 +242,7 @@ int			contains_only(char *str, char c);
 int			replace_var(char *var_val, char *n_arg, int *n_cur);
 int			index_of_newline(char *str);
 void		ft_cd_home(t_mem *mem);
+
+void		exec_verif(t_cmdlst *lst);
 
 #endif

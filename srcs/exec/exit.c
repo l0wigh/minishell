@@ -6,17 +6,17 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:31:08 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/22 18:33:05 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:02:37 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int		ft_exit_getstatus(char *arg)
+int	ft_exit_getstatus(char *arg)
 {
-	int exit_status;
-	int i;
-	char **tmp;
+	int		exit_status;
+	int		i;
+	char	**tmp;
 
 	exit_status = 0;
 	i = -1;
@@ -39,22 +39,32 @@ int		ft_exit_getstatus(char *arg)
 	return (exit_status);
 }
 
+int	exit_loop(t_cmdlst *lst)
+{
+	int		i;
+	char	**split;
+
+	i = -1;
+	if (lst->args[1])
+	{
+		split = ft_split(lst->args[1], ' ');
+		while (split[i])
+			++i;
+	}
+	return (i);
+}
+
 void	ft_exit(t_mem *mem, t_cmdlst *lst)
 {
 	int		i;
 	int		x;
 	int		exit_status;
-	char	**split;
 
-	i = -1;
 	x = -1;
+	i = exit_loop(lst);
 	exit_status = 0;
-	if (lst->args[1])
-	{
-		split = ft_split(lst->args[1], ' ');
-		while (split[++i]);
-	}
-	while (lst->args[++x]);
+	while (lst->args[x])
+		++x;
 	if (i >= 2 || x > 2)
 		write(1, "exit: too many arguments\n", 25);
 	else

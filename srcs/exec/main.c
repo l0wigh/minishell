@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:50:41 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/22 18:21:27 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:55:35 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../readline/include/readline/readline.h"
-
-void rl_replace_line(const char *, int);
 
 int	g_pid = 0;
 
@@ -36,7 +34,7 @@ char	*get_prompt(t_mem *mem)
 	}
 	else
 		start = ft_strdup("\n\001\033[36m\002minishell\001\033[0m\002 ");
-	if (mem->last_cmd_exit_statue == 0)
+	if (mem->lces == 0)
 		prompt = ft_strjoin(start, "🦁 \001\033[32m\002>\001\033[0m\002 ");
 	else
 		prompt = ft_strjoin(start, "🦁 \001\033[31m\002>\001\033[0m\002 ");
