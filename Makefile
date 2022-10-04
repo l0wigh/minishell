@@ -6,7 +6,7 @@
 #    By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 15:59:57 by hugrene           #+#    #+#              #
-#    Updated: 2022/09/28 14:56:02 by thomathi         ###   ########.fr        #
+#    Updated: 2022/10/04 15:36:12 by thomathi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,11 @@ NAME		:=	minishell
 
 CC			:=	clang
 # ifdef LDFLAGS
-# 	FLAGS		:=	$(LDFLAGS) -lreadline -Llibft -lft
-# 	LDFLAGS = -L/Users/$(USER)/goinfre/.brew/opt/readline/lib -lreadline
-# 	CPPFLAGS = -I/Users/$(USER)/goinfre/.brew/opt/readline/include
+FLAGS		:=	$(LDFLAGS) -lreadline -Llibft -lft
+LDFLAGS = -L /goinfre/$(USER)/.brew/Cellar/readline/8.1.2/lib/
+CPPFLAGS = -I/goinfre/$(USER)/.brew/Cellar/readline/8.1.2/include
 # else
-# FLAGS		:=	-Llibft -lft -L ./readline/lib/ -I ./readline/include/readline/ -lreadline
-FLAGS		:=	-Llibft -lft -lreadline
+# 	FLAGS		:=	-Llibft -lft -lreadline
 # endif
 CFLAGS		:=	-Wall -Wextra -Werror -g3
 #FLAGS		+=	-g -fsanitize=address
@@ -72,7 +71,11 @@ END			:=	\033[0m
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INCS) Makefile libft/libft.a
 	mkdir -p $(DIR_OBJS) $(DIR_OBJS)/parsing $(DIR_OBJS)/exec
-	$(CC) -I $(DIR_INCS) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+# ifdef CPPFLAGS
+	$(CC) -I $(DIR_INCS) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+# else
+# 	$(CC) -I $(DIR_INCS) $(CFLAGS) -c $< -o $@
+# endif
 	printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
 all:		libft $(NAME)
