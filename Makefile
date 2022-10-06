@@ -6,7 +6,7 @@
 #    By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 15:59:57 by hugrene           #+#    #+#              #
-#    Updated: 2022/10/04 15:36:12 by thomathi         ###   ########.fr        #
+#    Updated: 2022/10/06 20:42:26 by thomathi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ LST_SRCS	:=	exec/cd_utils.c \
 				parsing/lst.c \
 				parsing/parsing.c \
 				parsing/quotes.c \
+				parsing/quotes_utils.c \
 				parsing/utils.c \
 				ft_utils.c \
 				utils.c

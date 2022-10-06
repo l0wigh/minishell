@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:28:58 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/28 18:54:17 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:42:53 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,12 @@ int			free_str(char *str);
 int			contains_only(char *str, char c);
 int			replace_var(char *var_val, char *n_arg, int *n_cur);
 int			index_of_newline(char *str);
-void		ft_cd_home(t_mem *mem);
+char		**ft_cd_home(char **cmd, t_mem *mem);
+char		**change_pwd_absolute(char *path, char **my_env);
+
+// quotes_utils.c
+char		*check_double_dollar(char *arg);
+
 
 void		exec_verif(t_cmdlst *lst);
 

@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:33:10 by hugrene           #+#    #+#             */
-/*   Updated: 2022/10/04 20:55:31 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:45:43 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,31 +92,6 @@ char	*malloc_new_arg(char *arg, char **env, int lex)
 	return (n_arg);
 }
 
-char	*check_double_dollar(char *arg)
-{
-	int		i;
-	int		pid_len;
-	char	*new_arg;
-	char	*pid;
-
-	i = -1;
-	pid_len = 0;
-	if (arg[i + 1] == '$' && arg[i + 2] == '$')
-	{
-		pid_len = ft_strlen(ft_itoa(getpid()));
-		new_arg = malloc(sizeof(char) * (ft_strlen(arg) + pid_len - 2));
-		pid = ft_itoa(getpid());
-		while (pid[++i])
-			new_arg[i] = pid[i];
-		i = 1;
-		while (arg[++i])
-			new_arg[i + pid_len - 2] = arg[i];
-	}
-	else
-		return (arg);
-	return (new_arg);
-}
-
 /*
 	Replace the env vars of the given arg and return the
 	modified arg.
@@ -133,7 +108,6 @@ char	*replace_in_arg(char *arg, char **env, int lex)
 	char	*var_val;
 
 	n_arg = malloc_new_arg(arg, env, lex);
-	arg = check_double_dollar(arg);
 	if (!n_arg)
 		return (NULL);
 	cur = -1;

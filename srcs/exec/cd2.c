@@ -6,7 +6,7 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:54:00 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/21 18:08:49 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:28:29 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,16 @@ char	**change_pwd_home(char **my_env)
 	char	*home;
 
 	home = my_getenv(my_env, "HOME");
-	pwd_index = my_env_index_elem(my_env, "PWD");
-	new_pwd = ft_strjoin("PWD=", home);
-	free(my_env[pwd_index]);
-	my_env[pwd_index] = ft_strdup(new_pwd);
-	free(new_pwd);
+	if (chdir(home) == -1)
+		ft_printf("cd: no such file or directory\n");
+	else
+	{
+		pwd_index = my_env_index_elem(my_env, "PWD");
+		new_pwd = ft_strjoin("PWD=", home);
+		free(my_env[pwd_index]);
+		my_env[pwd_index] = ft_strdup(new_pwd);
+		free(new_pwd);
+	}
 	free(home);
 	return (my_env);
 }

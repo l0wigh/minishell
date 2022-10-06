@@ -6,20 +6,40 @@
 /*   By: hugrene <hugrene@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:50:28 by hugrene           #+#    #+#             */
-/*   Updated: 2022/09/28 18:57:54 by thomathi         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:35:44 by thomathi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
-void	ft_cd_home(t_mem *mem)
+char	**ft_cd_home(char **cmd, t_mem *mem)
 {
-	char	*path;
+	char	**new_cmd;
+	int		i;
 
-	path = ft_strdup(getenv("HOME"));
-	mem->my_env = change_pwd_home(mem->my_env);
-	if (chdir(path) == -1)
-		ft_printf("cd: HOME not set", mem);
+	if (cmd[1] && cmd[1][0] == '~')
+	{
+		i = ft_strlen(cmd[1]);
+		if (i == 1)
+			cmd[1] = ft_strdup(getenv("HOME"));
+		else
+		{
+			new_cmd = ft_split(cmd[1], '/');
+			cmd[1] = ft_strjoin(getenv("HOME"), "/");
+			i = 0;
+			while (new_cmd[++i])
+			{
+				cmd[1] = ft_strjoin(cmd[1], new_cmd[i]);
+				cmd[1] = ft_strjoin(cmd[1], "/");
+			}
+		}
+	}
+	if (chdir(cmd[1]) == -1)
+		ft_printf("cd: no such file or directory\n");
+	else
+		mem->my_env = change_pwd_absolute(cmd[1], mem->my_env);
+	return (mem->my_env);
 }
 
 char	**change_pwd_absolute(char *path, char **my_env)
@@ -78,26 +98,26 @@ void	ft_cd(char **cmd, t_mem *mem)
 {
 	char	*path;
 
-	if (cmd[1] == NULL || ft_strcmp(cmd[1], "~") == 0)
-		ft_cd_home(mem);
+	if (cmd[1] == NULL)
+		mem->my_env = change_pwd_home(mem->my_env);
 	else if (ft_strcmp(cmd[1], "/") == 0)
 	{
 		if (ft_strlen(cmd[1]) == 1)
 			path = ft_strdup(cmd[1]);
 		else
 			path = ft_strjoin(path, cmd[1]);
-		mem->my_env = change_pwd_absolute(path, mem->my_env);
 		if (chdir(path) == -1)
-			ft_printf("cd: not found", mem);
+			ft_printf("cd: no such file or directory\n");
+		else
+			mem->my_env = change_pwd_absolute(path, mem->my_env);
 	}
+	else if (ft_strcmp(ft_split(cmd[1], '/')[0], "~") == 0)
+		mem->my_env = ft_cd_home(cmd, mem);
 	else
 	{
 		if (chdir(cmd[1]) == -1)
-		{
-			ft_printf("cd: no such file or directory: ", mem);
-			ft_putstr_fd(cmd[1], 2);
-			ft_putchar_fd('\n', 2);
-		}
-		mem->my_env = change_pwd_relativ(cmd[1], mem->my_env);
+			ft_printf("cd: no such file or directory\n");
+		else
+			mem->my_env = change_pwd_relativ(cmd[1], mem->my_env);
 	}
 }
